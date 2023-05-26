@@ -63,7 +63,7 @@ public class PlayerControl : MonoBehaviour
 
 
 
-
+    private int playerID = 0;
 
     private float moveForce = 100f;
     private float maxSpeed = 100f;
@@ -91,7 +91,7 @@ public class PlayerControl : MonoBehaviour
         // Check if there is touch input
         if (Input.touchCount > 0 || Input.GetMouseButton(0))
         {
-            Debug.Log("Touching");
+            // Debug.Log("Touching");
             Vector3 touchPosition = Input.mousePosition;
 
             // 檢查觸摸位置是否在螢幕的右半邊
@@ -114,7 +114,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Touching");
+            // Debug.Log("Not Touching");
             isMoving = false;
             isMovingRight = false;
         }
