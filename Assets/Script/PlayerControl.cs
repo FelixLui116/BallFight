@@ -61,31 +61,25 @@ public class PlayerControl : MonoBehaviour
         
     // }
 
-
-
-    private int playerID = 0;
-
     private float moveForce = 100f;
     private float maxSpeed = 100f;
 
     // [SerializeField] private float playerControl_acre = 3f; // touchPosition.y < Screen.height / playerControl_arec
-    [SerializeField] private GameObject playerAcre;
+    public GameObject ControllArea;
     private Rigidbody2D rb;
     private bool isMoving;
     private bool isMovingRight;
     
-    private float playerAcre_W;
-    private float playerAcre_H;
+    private float ControllArea_W;
+    private float ControllArea_H;
+
+    private bool _isAI;
     // [SerializeField] private FloatingJoystick floatingJoystick;
     
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // rb.isKinematic = true; // Set Rigidbody2D to kinematic
-
-        RectTransform playerAcre_RT = playerAcre.GetComponent<RectTransform>();
-        // playerAcre_W = playerAcre_RT.rect.width;
-        playerAcre_H = playerAcre_RT.rect.height;
+        
     }
     private void Update() {
         // Check if there is touch input
@@ -95,13 +89,13 @@ public class PlayerControl : MonoBehaviour
             Vector3 touchPosition = Input.mousePosition;
 
             // 檢查觸摸位置是否在螢幕的右半邊
-            if (touchPosition.x > Screen.width / 2f && touchPosition.y < playerAcre_H)
+            if (touchPosition.x > Screen.width / 2f && touchPosition.y < ControllArea_H)
             {
                 isMoving = true;
                 isMovingRight = true;
             }
             // 檢查觸摸位置是否在螢幕的左半邊
-            else if (touchPosition.x < Screen.width / 2f && touchPosition.y < playerAcre_H)
+            else if (touchPosition.x < Screen.width / 2f && touchPosition.y < ControllArea_H)
             {
                 isMoving = true;
                 isMovingRight = false;
@@ -144,11 +138,26 @@ public class PlayerControl : MonoBehaviour
     }
 
 
+    public bool GetisAI(){
+        return _isAI;
+    }
+    public void SetisAI(bool value){
+        _isAI = value;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+    public void SetControllArea(){
+        // rb.isKinematic = true; // Set Rigidbody2D to kinematic
+        if (ControllArea != null)
+        {
+            RectTransform ControllArea_RT = ControllArea.GetComponent<RectTransform>();
+            // ControllArea_W = ControllArea_RT.rect.width;
+            ControllArea_H = ControllArea_RT.rect.height;
+        }
     }
 
     

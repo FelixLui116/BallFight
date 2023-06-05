@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScoreArea : MonoBehaviour
 {
     // public int scoreValue = 1;
-
+    public int ScoreID;
     [SerializeField] private PlayerInfo_UI playerInfo_UI;
 
     private void Awake() {
@@ -40,5 +40,9 @@ public class ScoreArea : MonoBehaviour
     void Update()
     {
         
+    }
+    // Setter ScoreArea
+    public void SetPlayerInfo(PlayerInfo_UI _playerInfo_UI){
+        this.playerInfo_UI = _playerInfo_UI;
     }
 }

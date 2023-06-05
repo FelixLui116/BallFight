@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerInfo : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int score = 0;
+    [SerializeField] private int score = 0;
     private int skill = 0;
 
-    private int playerID = 0;
+    private int _playerID = 0;
     
     // public int Life = 3;
     // public int Level = 1;
+
 
     //Getting Score
     public int GetScore(){
@@ -20,7 +21,7 @@ public class PlayerInfo : MonoBehaviour
 
     //Setting Score
     public void SetScore(int newScore){
-        score = newScore;
+        score += newScore;
     }
 
     //Getting Skill
@@ -32,6 +33,14 @@ public class PlayerInfo : MonoBehaviour
         skill = newSkill;
     }
 
+    public int GetPlayerID()   
+    {
+        return _playerID;
+    } 
+    public void SetPlayerID(int value)    
+    {
+        _playerID = value;
+    }
     void Start()
     {
         

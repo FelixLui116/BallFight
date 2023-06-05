@@ -8,10 +8,10 @@ public class PlayerInfo_UI : MonoBehaviour
     // [SerializeField] private GameObject playerinfo;
     [SerializeField] private Text score;
     
-    private PlayerInfo playerInfo;
+    [SerializeField] private PlayerInfo playerInfo;
 
     private void Awake() {
-        playerInfo = GameObject.Find("Player_1").GetComponent<PlayerInfo>();
+        // playerInfo = GameObject.Find("Player_1").GetComponent<PlayerInfo>();
     }
 
     // Start is called before the first frame update
@@ -38,5 +38,8 @@ public class PlayerInfo_UI : MonoBehaviour
     {
         playerInfo.SetScore(newScore);
     }
-
+    // Setter PlayerInfo
+    public void SetPlayerInfo(PlayerInfo playerInfo){
+        this.playerInfo = playerInfo;
+    }
 }
