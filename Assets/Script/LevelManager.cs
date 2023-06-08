@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     private bool isGameOver;
     [SerializeField] private int playerCount = 2;
     [SerializeField] private float timer;
+    public Text timerText;
 
     [Header("PLAYER")]
     [SerializeField] private GameObject playerStartPosotion;
@@ -40,11 +41,19 @@ public class LevelManager : MonoBehaviour
             // Update the timer
             timer -= Time.deltaTime;
 
+
+            int minutes = Mathf.FloorToInt(timer / 60f);
+            int seconds = Mathf.FloorToInt(timer % 60f);// 更新UI文本
+            timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+    
+
+
             // Check if the time has run out
             if (timer <= 0f)
             {
                 EndGame();
             }
+
         }
     }
 
