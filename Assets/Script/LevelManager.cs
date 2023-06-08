@@ -44,7 +44,8 @@ public class LevelManager : MonoBehaviour
 
             int minutes = Mathf.FloorToInt(timer / 60f);
             int seconds = Mathf.FloorToInt(timer % 60f);// 更新UI文本
-            timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+            // timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+            timerText.text = string.Format("{0:D2}", seconds);
     
 
 

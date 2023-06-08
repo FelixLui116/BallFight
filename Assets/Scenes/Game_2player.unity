@@ -170,6 +170,7 @@ MonoBehaviour:
   gameTime: 60
   playerCount: 2
   timer: 0
+  timerText: {fileID: 1255289020}
   playerStartPosotion: {fileID: 882565936}
   playerPrefab: {fileID: 4260894147987041458, guid: 9ccd5de039765de4a9fd01ce72e0083f, type: 3}
   playerAll: {fileID: 479562241}
