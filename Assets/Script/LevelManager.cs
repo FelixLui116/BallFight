@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject playerAll;
     [SerializeField] private GameObject playerControlArea;
+    [SerializeField] private Color[] playerColor = new Color[] {Color.red, Color.blue, Color.green, Color.yellow};
     // Start is called before the first frame update
 
     
@@ -74,7 +76,14 @@ public class LevelManager : MonoBehaviour
 
             GameObject player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity , playerAll.transform);
             player.name = "Player_" + i.ToString();
+            // Renderer renderer = player.GetComponent<Renderer>();
+            // renderer.material.color = playerColor[i];
+            Image image = player.GetComponent<Image>();
+            image.color = playerColor[i];
+            
             PlayerInfo pif = player.GetComponent<PlayerInfo>();
+            // 得到颜色
+            pif.SetPlayerColor(playerColor[i]);
             pif.SetPlayerID(i);
 
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb;
     public PhysicsMaterial2D ballPhysicsMaterial;
     private int playerID;
+    private Image ball_color;
 
     private int scoreValue = 1;
 
@@ -19,6 +21,8 @@ public class Ball : MonoBehaviour
 
     private void Awake() {
         
+        ball_color = GetComponent<Image>();
+
         rb = GetComponent<Rigidbody2D>();
         rb.sharedMaterial = ballPhysicsMaterial;
 
@@ -57,6 +61,10 @@ public class Ball : MonoBehaviour
         // Check if the collision is with the player
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Ball hit player!!!");
+            PlayerInfo playerInfo = collision.gameObject.GetComponent<PlayerInfo>();
+            SetBallColor(playerInfo.GetPlayerID(), playerInfo.GetPlayerColor() );
+
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             Vector2 contactPoint = collision.GetContact(0).point;
 
@@ -72,8 +80,15 @@ public class Ball : MonoBehaviour
             rb.AddForce(new Vector2(horizontalForceDirection * hitForce, 0f), ForceMode2D.Impulse);
 
         }
-
     }
+
+    public void SetBallColor(int _playerID, Color _color){
+        // ball_color = GetComponent<Renderer>();
+        // ball_color.material.SetColor("_Color", _Color);
+        ball_color.color = _color;
+        this.playerID = _playerID;
+    }
+
     // Update is called once per frame
     void Update()
     {

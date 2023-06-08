@@ -9,6 +9,8 @@ public class PlayerInfo : MonoBehaviour
     private int skill = 0;
 
     private int _playerID = 0;
+
+    private Color _color;
     
     // public int Life = 3;
     // public int Level = 1;
@@ -41,6 +43,14 @@ public class PlayerInfo : MonoBehaviour
     {
         _playerID = value;
     }
+
+    public void SetPlayerColor(Color _Color){
+        _color = _Color;
+    }
+    public Color GetPlayerColor(){
+        return _color;
+    }
+
     void Start()
     {
         
