@@ -12,12 +12,17 @@ public class Ball : MonoBehaviour
     private int playerID;
     private Image ball_color;
 
-    private int scoreValue = 1;
+    [SerializeField] private int scoreBall = 1;
+    private int hitAddScore_count = 1;
+
+    public Text score_text;
 
     [SerializeField] private GameObject ballResetPostion;
+    private PlayerInfo playerInfo;
 
     // private Vector3 ballreset_position = new Vector3(0f, 0f, 0f);
     // Start is called before the first frame update
+
 
     private void Awake() {
         
@@ -29,13 +34,15 @@ public class Ball : MonoBehaviour
         ballResetPostion = GameObject.Find("BallResetPos");
     }
 
-    public void SetScore(int value){
-        scoreValue = value;
-        // return scoreValue;
+    public void SetScoreBall(int value){
+        Debug.Log("SetScore: "+ value.ToString());
+        scoreBall = value;
+        score_text.text = scoreBall.ToString();
+        // return scoreBall;
     }
     
-    public int GetScoreValue(){
-        return scoreValue;
+    public int GetscoreBall(){
+        return scoreBall;
     }
 
     void Start()
@@ -45,6 +52,8 @@ public class Ball : MonoBehaviour
         float randomX = Random.Range(-1f, 1f);
         float randomY = Random.value > 0.5f ? 1f : -1f;
         Vector2 randomDirection = new Vector2(randomX, randomY).normalized;
+
+        score_text.text = scoreBall.ToString();
 
         // Apply the initial force to the ball
         rb.AddForce(randomDirection * hitForce, ForceMode2D.Impulse);
@@ -62,8 +71,11 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Ball hit player!!!");
-            PlayerInfo playerInfo = collision.gameObject.GetComponent<PlayerInfo>();
+            playerInfo = collision.gameObject.GetComponent<PlayerInfo>();
             SetBallColor(playerInfo.GetPlayerID(), playerInfo.GetPlayerColor() );
+            HitAddScore(hitAddScore_count); // adding score count.
+            
+
 
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             Vector2 contactPoint = collision.GetContact(0).point;
@@ -89,6 +101,13 @@ public class Ball : MonoBehaviour
         this.playerID = _playerID;
     }
 
+    public void HitAddScore(int hit_count){
+        // if(hit_count> ){
+        // }
+        int newScore = scoreBall + hitAddScore_count; 
+        SetScoreBall(newScore);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -99,6 +118,12 @@ public class Ball : MonoBehaviour
         this.transform.position = ballResetPostion.transform.position;
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0f;
+        
+        hitAddScore_count = 1;
+        SetScoreBall(1);
+        // 
+        // playerInfo.SetScore(1);
+
         Start();
     }
 }

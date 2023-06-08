@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -74,12 +75,15 @@ public class PlayerControl : MonoBehaviour
     private float ControllArea_H;
 
     private bool _isAI;
+
+    public Button skillButton;
     // [SerializeField] private FloatingJoystick floatingJoystick;
     
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         
+        // skillButton.onClick.AddListener(UseSkill);
     }
     private void Update() {
         // Check if there is touch input
@@ -158,6 +162,10 @@ public class PlayerControl : MonoBehaviour
             // ControllArea_W = ControllArea_RT.rect.width;
             ControllArea_H = ControllArea_RT.rect.height;
         }
+    }
+
+    public void UseSkill(){
+        Debug.Log("UseSkill");
     }
 
     

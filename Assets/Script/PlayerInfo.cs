@@ -6,6 +6,7 @@ public class PlayerInfo : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private int score = 0;
+    [SerializeField] private PlayerInfo_UI playerInfo_UI;
     private int skill = 0;
 
     private int _playerID = 0;
@@ -50,6 +51,14 @@ public class PlayerInfo : MonoBehaviour
     public Color GetPlayerColor(){
         return _color;
     }
+    // setter PlayerInfo_UI
+    public void SetPlayerInfo_UI(PlayerInfo_UI playerInfo_UI){
+        this.playerInfo_UI = playerInfo_UI;
+    }
+    // getter PlayerInfo_UI
+    public PlayerInfo_UI GetPlayerInfo_UI(){
+        return playerInfo_UI;
+    }
 
     void Start()
     {
@@ -61,4 +70,5 @@ public class PlayerInfo : MonoBehaviour
     {
         
     }
+
 }

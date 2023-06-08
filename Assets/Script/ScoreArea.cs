@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ScoreArea : MonoBehaviour
 {
-    // public int scoreValue = 1;
-    public int ScoreID;
-    [SerializeField] private PlayerInfo_UI playerInfo_UI;
+    // public int scoreBall = 1;
+    // public int ScoreID;
+    public PlayerInfo playerInfo;
 
     private void Awake() {
         // playerInfo_UI = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo_UI>();
@@ -18,15 +18,18 @@ public class ScoreArea : MonoBehaviour
         {
             Debug.Log("Score!");
             // Increment the score or perform any other scoring logic
-            
-            // Reset the ball position or perform any other necessary actions
+            // 
             Ball ball = collision.GetComponent<Ball>();
-            ball.ResetPosition();
-            
-            playerInfo_UI.ScoreUpdate(ball.GetScoreValue());
-            // float ballScore = ball.GetScoreValue();
 
-            // playerInfo_UI.ScoreUpdate(ballScore);
+            Debug.Log("ball.GetscoreBall(): "+ ball.GetscoreBall());
+            playerInfo.SetScore(ball.GetscoreBall());   // update player info Score
+
+            playerInfo.GetPlayerInfo_UI().ScoreUpdate(playerInfo.GetScore());     // update player UI Score by using playerinfo score
+    
+
+
+            // reset the ball's position and ball score
+            ball.ResetPosition();
         }
     }
 
@@ -42,7 +45,7 @@ public class ScoreArea : MonoBehaviour
         
     }
     // Setter ScoreArea
-    public void SetPlayerInfo(PlayerInfo_UI _playerInfo_UI){
-        this.playerInfo_UI = _playerInfo_UI;
+    public void SetPlayerInfo(PlayerInfo _playerInfo){
+        this.playerInfo = _playerInfo;
     }
 }

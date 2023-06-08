@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour
             // renderer.material.color = playerColor[i];
             Image image = player.GetComponent<Image>();
             image.color = playerColor[i];
-            
+
             PlayerInfo pif = player.GetComponent<PlayerInfo>();
             // 得到颜色
             pif.SetPlayerColor(playerColor[i]);
@@ -88,14 +88,15 @@ public class LevelManager : MonoBehaviour
 
 
             // UI info
-            GameObject scoreArea = Instantiate(socreAreaPrefab, new Vector3(0,0,0), Quaternion.identity , playerinfoGroup.transform);
-            PlayerInfo_UI playerUI = scoreArea.GetComponent<PlayerInfo_UI>();
-            playerUI.SetPlayerInfo(pif);
+            GameObject _playerUI = Instantiate(socreAreaPrefab, new Vector3(0,0,0), Quaternion.identity , playerinfoGroup.transform);
+            PlayerInfo_UI playerUI = _playerUI.GetComponent<PlayerInfo_UI>();
+
+            pif.SetPlayerInfo_UI(playerUI);
 
 
             GameObject sa_obj = socreAreaGroup.transform.GetChild(i).gameObject;
             ScoreArea sa = sa_obj.GetComponent<ScoreArea>();
-            sa.SetPlayerInfo(playerUI);
+            sa.SetPlayerInfo(pif);
 
 
             if (i == 0 ){  // is player

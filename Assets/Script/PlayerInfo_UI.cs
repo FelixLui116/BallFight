@@ -8,7 +8,6 @@ public class PlayerInfo_UI : MonoBehaviour
     // [SerializeField] private GameObject playerinfo;
     [SerializeField] private Text score;
     
-    [SerializeField] private PlayerInfo playerInfo;
 
     private void Awake() {
         // playerInfo = GameObject.Find("Player_1").GetComponent<PlayerInfo>();
@@ -19,6 +18,7 @@ public class PlayerInfo_UI : MonoBehaviour
     {
         
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -27,19 +27,15 @@ public class PlayerInfo_UI : MonoBehaviour
     }
 
     public void ScoreUpdate(int newScore){
-
-        playerScore_Add(newScore);
-
-        newScore = playerInfo.GetScore();
         score.text = newScore.ToString();
     }
 
     public void playerScore_Add(int newScore)
     {
-        playerInfo.SetScore(newScore);
+        // playerInfo.SetScore(newScore);
     }
-    // Setter PlayerInfo
-    public void SetPlayerInfo(PlayerInfo playerInfo){
-        this.playerInfo = playerInfo;
-    }
+    // // Setter PlayerInfo
+    // public void SetPlayerInfo(PlayerInfo playerInfo){
+    //     this.playerInfo = playerInfo;
+    // }
 }
