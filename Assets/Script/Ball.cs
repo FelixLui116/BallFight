@@ -77,19 +77,19 @@ public class Ball : MonoBehaviour
             
 
 
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            Vector2 contactPoint = collision.GetContact(0).point;
+            // Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            // Vector2 contactPoint = collision.GetContact(0).point;
 
-            // Calculate the normalized direction from the paddle to the contact point
-            Vector2 paddleToContact = (contactPoint - (Vector2)collision.transform.position).normalized;
+            // // Calculate the normalized direction from the paddle to the contact point
+            // Vector2 paddleToContact = (contactPoint - (Vector2)collision.transform.position).normalized;
 
-            // Calculate the horizontal force direction based on the paddle-to-contact direction
-            float horizontalForceDirection = Mathf.Sign(paddleToContact.x);
+            // // Calculate the horizontal force direction based on the paddle-to-contact direction
+            // float horizontalForceDirection = Mathf.Sign(paddleToContact.x);
 
-            rb.AddForce(new Vector2( 0f, 0f), ForceMode2D.Impulse);
+            // rb.AddForce(new Vector2( 0f, 0f), ForceMode2D.Impulse);
 
-            // Apply the horizontal force to the ball
-            rb.AddForce(new Vector2(horizontalForceDirection * hitForce, 0f), ForceMode2D.Impulse);
+            // // Apply the horizontal force to the ball
+            // rb.AddForce(new Vector2(horizontalForceDirection * hitForce, 0f), ForceMode2D.Impulse);
 
         }
     }
