@@ -27,6 +27,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject playerinfoGroup;
     [SerializeField] private GameObject socreAreaGroup;
 
+    
+    [Header("Ball")]
+    [SerializeField] private GameObject BallPrefab;
+    [SerializeField] private GameObject BallResetPsotion;
+
 
     void Start()
     {
@@ -78,6 +83,7 @@ public class LevelManager : MonoBehaviour
     public void StartGame(){
         
         ClonePlayer();
+        CloneBall();
     }
 
     private void ClonePlayer(){
@@ -100,6 +106,7 @@ public class LevelManager : MonoBehaviour
             }else{  // is AI
                 // pc.SetisAI(true);
                 pc.enabled = false;
+                
             }
 
             // Renderer renderer = player.GetComponent<Renderer>();
@@ -123,10 +130,13 @@ public class LevelManager : MonoBehaviour
             GameObject sa_obj = socreAreaGroup.transform.GetChild(i).gameObject;
             ScoreArea sa = sa_obj.GetComponent<ScoreArea>();
             sa.SetPlayerInfo(pif);
-
-
-            
         }
+    }
+
+    private void CloneBall(){
+        GameObject ball = Instantiate(BallPrefab, BallResetPsotion.transform.position, Quaternion.identity , playerAll.transform);
+        ball.name = "Ball_Clone";
+        ball.GetComponent<Ball>().GettingBallResetPosition(BallResetPsotion);
     }
 
 

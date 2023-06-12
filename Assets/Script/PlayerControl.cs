@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour //, IPointerDownHandler, IPointerUpHa
 
     private Rigidbody2D rb;
     private float moveForce = 100f;
-    private float maxSpeed = 100f;
+    private float maxSpeed = 500f;
 
     public void Awake()
     {

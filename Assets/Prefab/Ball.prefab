@@ -188,7 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc292ae8005075945b9810177c7f88cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitForce: 150
+  hitForce_base: 100
+  hitForce_add: 10
   ballPhysicsMaterial: {fileID: 6200000, guid: e9d70ba74d0cde442a2a3138f4464e05, type: 2}
   scoreBall: 1
   score_text: {fileID: 1707467484082626280}

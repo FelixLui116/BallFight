@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private float hitForce = 150f;
+    [SerializeField] private float hitForce_base = 100f;
+    [SerializeField] private float hitForce_add = 10f;
+    // [SerializeField] private float hitForce_total = 0f;
+
 
     private Rigidbody2D rb;
     public PhysicsMaterial2D ballPhysicsMaterial;
@@ -23,6 +26,9 @@ public class Ball : MonoBehaviour
     // private Vector3 ballreset_position = new Vector3(0f, 0f, 0f);
     // Start is called before the first frame update
 
+    public void GettingBallResetPosition(GameObject _ballResetPostion){
+        ballResetPostion = _ballResetPostion;
+    }
 
     private void Awake() {
         
@@ -31,7 +37,7 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.sharedMaterial = ballPhysicsMaterial;
 
-        ballResetPostion = GameObject.Find("BallResetPos");
+        // ballResetPostion = GameObject.Find("BallResetPos");
     }
 
     public void SetScoreBall(int value){
@@ -56,7 +62,7 @@ public class Ball : MonoBehaviour
         score_text.text = scoreBall.ToString();
 
         // Apply the initial force to the ball
-        rb.AddForce(randomDirection * hitForce, ForceMode2D.Impulse);
+        rb.AddForce(randomDirection * hitForce_base, ForceMode2D.Impulse);
     
     }
     private void FixedUpdate()
@@ -75,7 +81,14 @@ public class Ball : MonoBehaviour
             SetBallColor(playerInfo.GetPlayerID(), playerInfo.GetPlayerColor() );
             HitAddScore(hitAddScore_count); // adding score count.
             
-
+            // Apply additional force to the ball
+            // hitForce_total += hitForce_add; 
+            // float currentForce = hitForce_base + hitForce_total;
+            // Debug.Log("currentForce: "+ currentForce.ToString() + " || hitForce_total: "+hitForce_total);
+            // Debug.Log("hitForce_total: "+hitForce_total + " || hitForce_…base: "+hitForce_base + " || hitForce_add: "+hitForce_add );
+            Vector2 forceDirection = collision.GetContact(0).normal;
+            // rb.AddForce(forceDirection * currentForce, ForceMode2D.Impulse);
+            rb.AddForce(forceDirection * hitForce_add, ForceMode2D.Impulse);
 
             // Rigidbody2D rb = GetComponent<Rigidbody2D>();
             // Vector2 contactPoint = collision.GetContact(0).point;
@@ -89,7 +102,7 @@ public class Ball : MonoBehaviour
             // rb.AddForce(new Vector2( 0f, 0f), ForceMode2D.Impulse);
 
             // // Apply the horizontal force to the ball
-            // rb.AddForce(new Vector2(horizontalForceDirection * hitForce, 0f), ForceMode2D.Impulse);
+            // rb.AddForce(new Vector2(horizontalForceDirection * hitForce_base, 0f), ForceMode2D.Impulse);
 
         }
     }
