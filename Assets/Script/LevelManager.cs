@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject playerAll;
     [SerializeField] private GameObject playerControlArea;
+    [SerializeField] private GameObject buttonLeft;
+    [SerializeField] private GameObject buttonRight;
     [SerializeField] private Color[] playerColor = new Color[] {Color.red, Color.blue, Color.green, Color.yellow};
     // Start is called before the first frame update
 
@@ -86,6 +88,20 @@ public class LevelManager : MonoBehaviour
 
             GameObject player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity , playerAll.transform);
             player.name = "Player_" + i.ToString();
+
+            Debug.Log("is Player");
+            PlayerControl pc = player.GetComponent<PlayerControl>();
+            if (i == 0 ){  // is player
+                // pc.ControllArea =playerControlArea;
+                // pc.SetisAI(false);
+                // pc.SetControllArea();
+                pc.leftButton = buttonLeft.GetComponent<PlayerButtonPress>();
+                pc.rightButton = buttonRight.GetComponent<PlayerButtonPress>();
+            }else{  // is AI
+                // pc.SetisAI(true);
+                pc.enabled = false;
+            }
+
             // Renderer renderer = player.GetComponent<Renderer>();
             // renderer.material.color = playerColor[i];
             Image image = player.GetComponent<Image>();
@@ -109,14 +125,7 @@ public class LevelManager : MonoBehaviour
             sa.SetPlayerInfo(pif);
 
 
-            if (i == 0 ){  // is player
-                Debug.Log("is Player");
-                PlayerControl pc = player.GetComponent<PlayerControl>();
-                pc.ControllArea =playerControlArea;
-                pc.SetisAI(false);
-                pc.SetControllArea();
-            }else{  // is AI
-            }
+            
         }
     }
 

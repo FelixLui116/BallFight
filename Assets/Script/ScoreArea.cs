@@ -16,12 +16,12 @@ public class ScoreArea : MonoBehaviour
     {
         if (collision.CompareTag("Ball"))
         {
-            Debug.Log("Score!");
+            // Debug.Log("Score!");
             // Increment the score or perform any other scoring logic
             // 
             Ball ball = collision.GetComponent<Ball>();
 
-            Debug.Log("ball.GetscoreBall(): "+ ball.GetscoreBall());
+            // Debug.Log("ball.GetscoreBall(): "+ ball.GetscoreBall());
             playerInfo.SetScore(ball.GetscoreBall());   // update player info Score
 
             playerInfo.GetPlayerInfo_UI().ScoreUpdate(playerInfo.GetScore());     // update player UI Score by using playerinfo score

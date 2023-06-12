@@ -35,7 +35,7 @@ public class Ball : MonoBehaviour
     }
 
     public void SetScoreBall(int value){
-        Debug.Log("SetScore: "+ value.ToString());
+        // Debug.Log("SetScore: "+ value.ToString());
         scoreBall = value;
         score_text.text = scoreBall.ToString();
         // return scoreBall;
@@ -70,7 +70,7 @@ public class Ball : MonoBehaviour
         // Check if the collision is with the player
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Ball hit player!!!");
+            // Debug.Log("Ball hit player!!!");
             playerInfo = collision.gameObject.GetComponent<PlayerInfo>();
             SetBallColor(playerInfo.GetPlayerID(), playerInfo.GetPlayerColor() );
             HitAddScore(hitAddScore_count); // adding score count.

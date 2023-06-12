@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4260894147987041460}
   - component: {fileID: 4260894147987041463}
   - component: {fileID: 6114862765461782358}
+  - component: {fileID: 8658152754125997613}
   m_Layer: 5
   m_Name: Player_1
   m_TagString: Player
@@ -93,8 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68b35572babd9c418abb0ab813e4d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllArea: {fileID: 0}
-  skillButton: {fileID: 0}
+  leftButton: {fileID: 0}
+  rightButton: {fileID: 0}
 --- !u!114 &452083006147994397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,3 +192,16 @@ PolygonCollider2D:
       - {x: 35.229874, y: -4.9342155}
       - {x: 35.034637, y: 4.87941}
       - {x: 23.749504, y: 11.9967}
+--- !u!114 &8658152754125997613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260894147987041458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
