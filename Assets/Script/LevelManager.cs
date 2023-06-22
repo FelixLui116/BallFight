@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
     [Header("Ball")]
     [SerializeField] private GameObject BallPrefab;
     [SerializeField] private GameObject BallResetPsotion;
+    private GameObject ball;
 
 
     void Start()
@@ -69,8 +70,9 @@ public class LevelManager : MonoBehaviour
     {
         isGameOver = true;
         Debug.Log("Game End!");
-        // ResetTimer();
+
         
+        // ResetTimer();
         // Perform any game over actions here
     }
 
@@ -82,8 +84,8 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame(){
         
-        ClonePlayer();
         CloneBall();
+        ClonePlayer();
     }
 
     private void ClonePlayer(){
@@ -106,7 +108,9 @@ public class LevelManager : MonoBehaviour
             }else{  // is AI
                 // pc.SetisAI(true);
                 pc.enabled = false;
-                
+                PlayerBot playerBot= player.GetComponent<PlayerBot>();
+                playerBot.enabled = true;
+                playerBot.SetBall(ball);
             }
 
             // Renderer renderer = player.GetComponent<Renderer>();
@@ -134,9 +138,10 @@ public class LevelManager : MonoBehaviour
     }
 
     private void CloneBall(){
-        GameObject ball = Instantiate(BallPrefab, BallResetPsotion.transform.position, Quaternion.identity , playerAll.transform);
-        ball.name = "Ball_Clone";
-        ball.GetComponent<Ball>().GettingBallResetPosition(BallResetPsotion);
+        GameObject _ball = Instantiate(BallPrefab, BallResetPsotion.transform.position, Quaternion.identity , playerAll.transform);
+        _ball.name = "Ball_Clone";
+        _ball.GetComponent<Ball>().GettingBallResetPosition(BallResetPsotion);
+        ball = _ball;
     }
 
 
