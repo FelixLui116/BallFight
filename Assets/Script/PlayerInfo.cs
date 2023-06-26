@@ -11,7 +11,9 @@ public class PlayerInfo : MonoBehaviour
 
     private int _playerID = 0;
 
-    private Color _color;
+    [SerializeField] private Color _color;
+
+    public bool score_Active = true;
     
     // public int Life = 3;
     // public int Level = 1;
@@ -24,7 +26,9 @@ public class PlayerInfo : MonoBehaviour
 
     //Setting Score
     public void SetScore(int newScore){
-        score += newScore;
+        if(score_Active){
+            score += newScore;
+        }
     }
 
     //Getting Skill

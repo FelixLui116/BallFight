@@ -7,6 +7,8 @@ public class PlayerInfo_UI : MonoBehaviour
 {
     // [SerializeField] private GameObject playerinfo;
     [SerializeField] private Text score;
+    [SerializeField] private Image playerColor;
+    //[SerializeField] private Color color;
     
 
     private void Awake() {
@@ -29,11 +31,11 @@ public class PlayerInfo_UI : MonoBehaviour
     public void ScoreUpdate(int newScore){
         score.text = newScore.ToString();
     }
-
-    public void playerScore_Add(int newScore)
-    {
-        // playerInfo.SetScore(newScore);
+    public void SetColor(Color _color){
+        playerColor.color = _color;
     }
+
+
     // // Setter PlayerInfo
     // public void SetPlayerInfo(PlayerInfo playerInfo){
     //     this.playerInfo = playerInfo;

@@ -10,6 +10,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int playerCount = 2;
     [SerializeField] private float timer;
     public Text timerText;
+    public GameObject canvas;
+    public GameObject gameEndPanelPrefab;
+
+    [SerializeField] private PlayerInfo[] playerInfo = new PlayerInfo[4];
 
     [Header("PLAYER")]
     [SerializeField] private GameObject playerStartPosotion;
@@ -49,7 +53,6 @@ public class LevelManager : MonoBehaviour
             // Update the timer
             timer -= Time.deltaTime;
 
-
             int minutes = Mathf.FloorToInt(timer / 60f);
             int seconds = Mathf.FloorToInt(timer % 60f);// 更新UI文本
             // timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
@@ -58,7 +61,7 @@ public class LevelManager : MonoBehaviour
 
 
             // Check if the time has run out
-            if (timer <= 0f)
+            if (timer <= 0.05f)
             {
                 EndGame();
             }
@@ -70,8 +73,9 @@ public class LevelManager : MonoBehaviour
     {
         isGameOver = true;
         Debug.Log("Game End!");
+        PopGameEndPanel();
 
-        
+
         // ResetTimer();
         // Perform any game over actions here
     }
@@ -86,6 +90,13 @@ public class LevelManager : MonoBehaviour
         
         CloneBall();
         ClonePlayer();
+    }
+
+    private void PopGameEndPanel(){
+        GameObject gameEndPanel = Instantiate(gameEndPanelPrefab,   canvas.transform);
+        // gameEndPanel.name = "GameEndPanel";
+        // GameEndPanel gep = gameEndPanel.GetComponent<GameEndPanel>();
+        // gep.SetPlayerInfo(playerInfo);
     }
 
     private void ClonePlayer(){
@@ -118,22 +129,27 @@ public class LevelManager : MonoBehaviour
             Image image = player.GetComponent<Image>();
             image.color = playerColor[i];
 
-            PlayerInfo pif = player.GetComponent<PlayerInfo>();
+            // PlayerInfo pif = player.GetComponent<PlayerInfo>();
+            playerInfo[i] = player.GetComponent<PlayerInfo>();
             // 得到颜色
-            pif.SetPlayerColor(playerColor[i]);
-            pif.SetPlayerID(i);
-
+            // pif.SetPlayerColor(playerColor[i]);
+            // pif.SetPlayerID(i);
+            playerInfo[i].SetPlayerColor(playerColor[i]);
+            playerInfo[i].SetPlayerID(i);
 
             // UI info
             GameObject _playerUI = Instantiate(socreAreaPrefab, new Vector3(0,0,0), Quaternion.identity , playerinfoGroup.transform);
             PlayerInfo_UI playerUI = _playerUI.GetComponent<PlayerInfo_UI>();
 
-            pif.SetPlayerInfo_UI(playerUI);
+            // pif.SetPlayerInfo_UI(playerUI);
+            playerInfo[i].SetPlayerInfo_UI(playerUI);
 
+            playerUI.SetColor( image.color );
 
             GameObject sa_obj = socreAreaGroup.transform.GetChild(i).gameObject;
             ScoreArea sa = sa_obj.GetComponent<ScoreArea>();
-            sa.SetPlayerInfo(pif);
+            // sa.SetPlayerInfo(pif);
+            sa.SetPlayerInfo(playerInfo[i]);
         }
     }
 
