@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public float gameTime = 60f; // 1 minute in seconds
-    private bool isGameOver;
+    private bool isGameOver = true;
     [SerializeField] private int playerCount = 2;
     [SerializeField] private float timer;
     public Text timerText;
     public GameObject canvas;
-    public GameObject gameEndPanelPrefab;
+    public GameObject gameEndPanel;
 
     [SerializeField] private PlayerInfo[] playerInfo = new PlayerInfo[4];
 
@@ -35,13 +35,16 @@ public class LevelManager : MonoBehaviour
     [Header("Ball")]
     [SerializeField] private GameObject BallPrefab;
     [SerializeField] private GameObject BallResetPsotion;
-    private GameObject ball;
+    [SerializeField] private GameObject ball;
 
+    private void Awake() {
+        
+        EndPanel endPanel = gameEndPanel.GetComponent<EndPanel>();
+        endPanel.restartButton.onClick.AddListener(StartGame);
+    }
 
     void Start()
     {
-        timer = gameTime;
-        isGameOver = false;
         
         StartGame();
     }
@@ -74,8 +77,9 @@ public class LevelManager : MonoBehaviour
         isGameOver = true;
         Debug.Log("Game End!");
         PopGameEndPanel();
-
-
+        Ball_Stop();
+        Playerinfo_destroy();
+        PlayerOject_destroy();
         // ResetTimer();
         // Perform any game over actions here
     }
@@ -86,14 +90,44 @@ public class LevelManager : MonoBehaviour
         isGameOver = false;
     }
 
+    private void Ball_Stop(){
+        ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        ball.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+        // destroy ball
+        Destroy(ball);
+        ball = null;
+    }
+    private void Playerinfo_destroy(){
+        for (int i = 0; i < playerinfoGroup.transform.childCount; i++)
+        {
+            Destroy(playerinfoGroup.transform.GetChild(i).gameObject);
+        }
+    }
+    private void PlayerOject_destroy(){
+        for (int i = 0; i < playerAll.transform.childCount; i++)
+        {
+            Destroy(playerAll.transform.GetChild(i).gameObject);
+        }
+    }
+
+
     public void StartGame(){
         
+        gameEndPanel.SetActive(false);
+        timer = gameTime;
+        isGameOver = false;
+        
+        ResetTimer();
         CloneBall();
         ClonePlayer();
     }
 
     private void PopGameEndPanel(){
-        GameObject gameEndPanel = Instantiate(gameEndPanelPrefab,   canvas.transform);
+        // GameObject gameEndPanel = Instantiate(gameEndPanelPrefab,   canvas.transform);
+        gameEndPanel.SetActive(true);
+        // EndPanel endPanel = gameEndPanel.GetComponent<EndPanel>();
+        // endPanel.restartButton.onClick.AddListener(StartGame);
+
         // gameEndPanel.name = "GameEndPanel";
         // GameEndPanel gep = gameEndPanel.GetComponent<GameEndPanel>();
         // gep.SetPlayerInfo(playerInfo);
