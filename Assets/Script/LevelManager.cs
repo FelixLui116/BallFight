@@ -147,7 +147,7 @@ public class LevelManager : MonoBehaviour
             GameObject player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity , playerAll.transform);
             player.name = "Player_" + i.ToString();
 
-            Debug.Log("is Player");
+            // Debug.Log("is Player");
             PlayerControl pc = player.GetComponent<PlayerControl>();
             if (i == 0 ){  // is player
                 // pc.ControllArea =playerControlArea;
@@ -188,6 +188,7 @@ public class LevelManager : MonoBehaviour
             playerUI.SetColor( image.color );
 
             GameObject sa_obj = socreAreaGroup.transform.GetChild(i).gameObject;
+            sa_obj.SetActive(true);
             ScoreArea sa = sa_obj.GetComponent<ScoreArea>();
             // sa.SetPlayerInfo(pif);
             sa.SetPlayerInfo(playerInfo[i]);
