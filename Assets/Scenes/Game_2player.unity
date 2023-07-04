@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd05632f7b5ca848b8241553ecfc0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 2
+  gameTime: 30
   playerCount: 2
   timer: 0
   timerText: {fileID: 1255289020}
@@ -1160,15 +1160,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3282101835851857741, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3282101835851857741, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3282101835851857741, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3282101835851857741, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1189,6 +1189,26 @@ PrefabInstance:
     - target: {fileID: 3282101835851857741, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669953776614731922, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
+      propertyPath: m_Spacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669953776614731922, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669953776614731922, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
+      propertyPath: m_ReverseArrangement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669953776614731922, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
+      propertyPath: m_ChildForceExpandWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669953776614731922, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}
+      propertyPath: m_ChildForceExpandHeight
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1d44c86d0dbbe34f9291dc5338e124a, type: 3}

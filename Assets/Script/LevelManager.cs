@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     public GameObject canvas;
     public GameObject gameEndPanel;
 
+    private EndPanel endPanel;
+
     [SerializeField] private PlayerInfo[] playerInfo = new PlayerInfo[4];
 
     [Header("PLAYER")]
@@ -39,7 +41,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake() {
         
-        EndPanel endPanel = gameEndPanel.GetComponent<EndPanel>();
+        endPanel = gameEndPanel.GetComponent<EndPanel>();
         endPanel.restartButton.onClick.AddListener(StartGame);
     }
 
@@ -120,11 +122,14 @@ public class LevelManager : MonoBehaviour
         ResetTimer();
         CloneBall();
         ClonePlayer();
+        // Debug.Log("=== " +playerInfo.Length);
     }
 
     private void PopGameEndPanel(){
         // GameObject gameEndPanel = Instantiate(gameEndPanelPrefab,   canvas.transform);
         gameEndPanel.SetActive(true);
+        
+        endPanel.ShowEndGameInfo(playerInfo);
         // EndPanel endPanel = gameEndPanel.GetComponent<EndPanel>();
         // endPanel.restartButton.onClick.AddListener(StartGame);
 
@@ -165,6 +170,8 @@ public class LevelManager : MonoBehaviour
 
             // PlayerInfo pif = player.GetComponent<PlayerInfo>();
             playerInfo[i] = player.GetComponent<PlayerInfo>();
+            // Debug.Log("is PlayerInfo: " + playerInfo[i].name );
+
             // 得到颜色
             // pif.SetPlayerColor(playerColor[i]);
             // pif.SetPlayerID(i);
