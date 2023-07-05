@@ -16,6 +16,8 @@ public class GlobalManager : MonoBehaviour
     private int [] playerIDs = new int[4] {1, 2, 3, 4};
     private Color [] playerColors = new Color[4] {Color.red, Color.blue, Color.green, Color.yellow};
 
+    private int gameMode = 0; // 0: 2 player, 1: 4 player
+
     private void Awake() {
         if (Instance == null) {
             DontDestroyOnLoad(gameObject);
@@ -48,6 +50,13 @@ public class GlobalManager : MonoBehaviour
         Debug.Log("Loading Scene: " + sceneName);
         SceneManager.LoadSceneAsync(sceneName , LoadSceneMode.Single); 
         // SceneManager.LoadSceneAsync(sceneName); 
+    }
+    public void SetGameMode(int _int){  // setter / getter
+        gameMode = _int;
+    }
+
+    public int GetGameMode(){
+        return gameMode;
     }
 
 

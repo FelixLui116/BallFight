@@ -6,7 +6,7 @@ public class ScoreArea : MonoBehaviour
 {
     // public int scoreBall = 1;
     // public int ScoreID;
-    public PlayerInfo playerInfo;
+    public PlayerInfo[] playerInfo;
 
     private void Awake() {
         // playerInfo_UI = GameObject.Find("PlayerInfo").GetComponent<PlayerInfo_UI>();
@@ -21,10 +21,16 @@ public class ScoreArea : MonoBehaviour
             // 
             Ball ball = collision.GetComponent<Ball>();
 
-            // Debug.Log("ball.GetscoreBall(): "+ ball.GetscoreBall());
-            playerInfo.SetScore(ball.GetscoreBall());   // update player info Score
+            if(ball.GetBall_ID() == -1){ // No one hit the ball (while ball)
+                ball.ResetPosition();
+                return;
+            } 
 
-            playerInfo.GetPlayerInfo_UI().ScoreUpdate(playerInfo.GetScore());     // update player UI Score by using playerinfo score
+            PlayerInfo _pif = playerInfo[ball.GetBall_ID()];
+
+            // Debug.Log("ball.GetscoreBall(): "+ ball.GetscoreBall());
+            _pif.SetScore(ball.GetscoreBall());   // update player info Score
+            _pif.GetPlayerInfo_UI().ScoreUpdate(_pif.GetScore());     // update player UI Score by using playerinfo score
     
 
 
@@ -45,7 +51,7 @@ public class ScoreArea : MonoBehaviour
         
     }
     // Setter ScoreArea
-    public void SetPlayerInfo(PlayerInfo _playerInfo){
+    public void SetPlayerInfo(PlayerInfo[] _playerInfo){
         this.playerInfo = _playerInfo;
     }
 }

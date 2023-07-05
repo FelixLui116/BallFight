@@ -43,6 +43,15 @@ public class LevelManager : MonoBehaviour
         
         endPanel = gameEndPanel.GetComponent<EndPanel>();
         endPanel.restartButton.onClick.AddListener(StartGame);
+
+        if (GlobalManager.Instance == null)
+        {
+            Debug.Log("GlobalManager.Instance == null, Please enter the StartSceen to start the game");
+        }
+        else
+        {
+            playerCount = GlobalManager.Instance.GetGameMode();
+        }
     }
 
     void Start()
@@ -191,7 +200,8 @@ public class LevelManager : MonoBehaviour
             sa_obj.SetActive(true);
             ScoreArea sa = sa_obj.GetComponent<ScoreArea>();
             // sa.SetPlayerInfo(pif);
-            sa.SetPlayerInfo(playerInfo[i]);
+            // sa.SetPlayerInfo(playerInfo[i]);
+            sa.SetPlayerInfo(playerInfo);
         }
     }
 
@@ -201,6 +211,9 @@ public class LevelManager : MonoBehaviour
         _ball.GetComponent<Ball>().GettingBallResetPosition(BallResetPsotion);
         ball = _ball;
     }
-
+    
+    public void GetPlayerCount(int count){
+        playerCount = count;
+    }
 
 }

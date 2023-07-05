@@ -12,8 +12,9 @@ public class Ball : MonoBehaviour
 
     private Rigidbody2D rb;
     public PhysicsMaterial2D ballPhysicsMaterial;
-    private int playerID;
+    private int playerID = -1;
     private Image ball_color;
+    private Animation animation;
 
     [SerializeField] private int scoreBall = 1;
     private int hitAddScore_count = 1;
@@ -33,6 +34,7 @@ public class Ball : MonoBehaviour
     private void Awake() {
         
         ball_color = GetComponent<Image>();
+        animation = GetComponent<Animation>();
 
         rb = GetComponent<Rigidbody2D>();
         rb.sharedMaterial = ballPhysicsMaterial;
@@ -53,6 +55,16 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(StartDelay());
+        
+    }
+
+    IEnumerator StartDelay()
+    {
+        GetComponent<Animation>().Play("BallColorChange");
+
+        yield return new WaitForSeconds(1f);
+
         // Generate a random direction
         // X , Y range  up and down
         float randomX = Random.Range(-1f, 1f);
@@ -62,12 +74,16 @@ public class Ball : MonoBehaviour
         score_text.text = scoreBall.ToString();
 
         // Apply the initial force to the ball
-        rb.AddForce(randomDirection * hitForce_base, ForceMode2D.Impulse);
-    
+        rb.AddForce(randomDirection * hitForce_base, ForceMode2D.Impulse); 
     }
+
+
+    
     private void FixedUpdate()
     {
         // Move the ball based on input
+        DrawForceArrow();
+
     }
 
 
@@ -133,10 +149,28 @@ public class Ball : MonoBehaviour
         rb.angularVelocity = 0f;
         
         hitAddScore_count = 1;
+
+        playerID = -1;
+
         SetScoreBall(1);
         // 
         // playerInfo.SetScore(1);
 
         Start();
+    }
+
+    public int GetBall_ID(){
+        return this.playerID;
+    }
+
+    private void DrawForceArrow()
+    {
+        Vector2 forceDirection = rb.velocity.normalized;
+        float forceMagnitude = rb.velocity.magnitude;
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + new Vector3(forceDirection.x, forceDirection.y, 0f) * forceMagnitude * 0.5f;
+
+        Debug.DrawRay(startPos, endPos - startPos, Color.red);
     }
 }
