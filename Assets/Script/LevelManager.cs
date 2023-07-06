@@ -153,7 +153,7 @@ public class LevelManager : MonoBehaviour
             GameObject psp = playerStartPosotion.transform.GetChild(i).gameObject;
             Vector3 spawnPosition = psp.transform.position; // 從玩家起始位置物件獲取生成位置
 
-            GameObject player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity , playerAll.transform);
+            GameObject player = Instantiate(playerPrefab, spawnPosition,psp.transform.rotation , playerAll.transform);
             player.name = "Player_" + i.ToString();
 
             // Debug.Log("is Player");
