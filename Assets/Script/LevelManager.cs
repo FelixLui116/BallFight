@@ -169,7 +169,11 @@ public class LevelManager : MonoBehaviour
                 pc.enabled = false;
                 PlayerBot playerBot= player.GetComponent<PlayerBot>();
                 playerBot.enabled = true;
-                playerBot.SetBall(ball);
+                playerBot.SetBall(ball); 
+                if (i >=2)  // player 3,4 is move up down
+                {
+                    playerBot.SetUpDown(true);
+                }
             }
 
             // Renderer renderer = player.GetComponent<Renderer>();
