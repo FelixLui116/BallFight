@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SkillPoint : MonoBehaviour
 {
-    public enum SkillType
+    public enum SkillType  // Fire, Water, Wind, Thunder
     {
-        Skill1,
-        Skill2,
-        Skill3
+        None,
+        Fire,
+        Water,
+        Wind,
+        Thunder
     }
     public SkillType skillType;
 
@@ -22,7 +24,7 @@ public class SkillPoint : MonoBehaviour
             int id = ball.GetPlayerID();
             PlayerInfo playerInfo = ball.GetPlayerInfo();
             Debug.Log($"playerInfo: {playerInfo}");
-            if (id > -1) // -1 not hit player yet
+            if (id > -1 &&  playerInfo.GetSkillCount() <1 ) // -1 not hit player yet
             {  
                 ApplySkillToPlayer(playerInfo);
                 DestroySkillPoint();
@@ -30,18 +32,25 @@ public class SkillPoint : MonoBehaviour
         }
     }
     // pass number of skill to player info
+    // Fire Skill: Deals extra damage or ignites the target.
+    // Water skills: Reduce the target's movement speed or freeze the target.
+    // Wind Skill: Push away the target or cause a range of effects.
+    // Thunder Skill: Causes electric shock damage or paralyzes the target.
     private void ApplySkillToPlayer(PlayerInfo player) 
     {
         switch (skillType)
         {
-            case SkillType.Skill1:
-                player.SetSkill(1);
+            case SkillType.Fire:
+                player.SetSkill(PlayerInfo.SkillType.Fire);
                 break;
-            case SkillType.Skill2:
-                player.SetSkill(2);
+            case SkillType.Water:
+                player.SetSkill(PlayerInfo.SkillType.Water);
                 break;
-            case SkillType.Skill3:;
-                player.SetSkill(3);
+            case SkillType.Wind:;
+                player.SetSkill(PlayerInfo.SkillType.Wind);
+                break;
+            case SkillType.Thunder:;
+                player.SetSkill(PlayerInfo.SkillType.Thunder);
                 break;
         }
     }

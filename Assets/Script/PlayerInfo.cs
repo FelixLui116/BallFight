@@ -8,6 +8,7 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] private int score = 0;
     [SerializeField] private PlayerInfo_UI playerInfo_UI;
     private int skill = -1;
+    private int skillCount = 0;
 
     private int _playerID = 0;
 
@@ -15,9 +16,13 @@ public class PlayerInfo : MonoBehaviour
 
     public bool score_Active = true;
     
-    // public int Life = 3;
-    // public int Level = 1;
-
+    public enum SkillType{
+        None,
+        Fire,
+        Water,
+        Wind,
+        Thunder
+    }
 
     //Getting Score
     public int GetScore(){
@@ -36,15 +41,20 @@ public class PlayerInfo : MonoBehaviour
         return skill;
     }
     //Setting Skill
-    public void SetSkill(int newSkill){ //int newSkill
-        skill = newSkill;
-        Debug.Log($"Skill: {skill}");
+    public void SetSkill(SkillType newSkill){ //int newSkill
+        // skill = newSkill;
+
+        skillCount++;
+        Debug.Log($"Skill: {newSkill}");
     }
 
     public int GetPlayerID()   
     {
         return _playerID;
     } 
+    public int GetSkillCount(){
+        return skillCount;
+    }
     public void SetPlayerID(int value)    
     {
         _playerID = value;
