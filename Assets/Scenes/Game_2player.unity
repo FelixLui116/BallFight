@@ -200,6 +200,9 @@ MonoBehaviour:
   BallPrefab: {fileID: 7068400716896940276, guid: 90022578e2430d3458e6bfe3cd345bca, type: 3}
   BallResetPsotion: {fileID: 1167686550}
   ball: {fileID: 0}
+  SkillBallPrefab: {fileID: 7068400716896940276, guid: fbadf9c4f8c9e0a4388741a58abcb043, type: 3}
+  SkillBallPsotion: {fileID: 1023252834}
+  generationRange: 200
 --- !u!1 &83788574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,6 +2030,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1023252834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023252835}
+  m_Layer: 5
+  m_Name: SkillBallPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1023252835
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023252834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1745308564}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1025700365
 GameObject:
   m_ObjectHideFlags: 0
@@ -3520,6 +3559,7 @@ RectTransform:
   - {fileID: 882565937}
   - {fileID: 479562242}
   - {fileID: 529783381}
+  - {fileID: 1023252835}
   m_Father: {fileID: 1030499537}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

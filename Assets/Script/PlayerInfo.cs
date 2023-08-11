@@ -7,7 +7,7 @@ public class PlayerInfo : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private int score = 0;
     [SerializeField] private PlayerInfo_UI playerInfo_UI;
-    private int skill = 0;
+    private int skill = -1;
 
     private int _playerID = 0;
 
@@ -36,8 +36,9 @@ public class PlayerInfo : MonoBehaviour
         return skill;
     }
     //Setting Skill
-    public void SetSkill(int newSkill){
+    public void SetSkill(int newSkill){ //int newSkill
         skill = newSkill;
+        Debug.Log($"Skill: {skill}");
     }
 
     public int GetPlayerID()   

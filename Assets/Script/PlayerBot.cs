@@ -7,10 +7,11 @@ public class PlayerBot : MonoBehaviour
     // Start is called before the first frame update
     private GameObject ball;
     
-    private float moveSpeed = 100f;
+    private float moveSpeed = 200f;
 
     [SerializeField]private bool movement_ = true; 
     [SerializeField]private bool is_updown = false; 
+    [SerializeField]private bool shouldMove = true; 
     private Vector3 target_Position;
     private Rigidbody2D rb;
     public float stoppingDistance = 1f;
@@ -37,26 +38,72 @@ public class PlayerBot : MonoBehaviour
     {
         while (true)
         {
+            // Randon number between 0.25 to 1
+            // float randomDelay = Random.Range(0.25f, 1f);
+            float randomDelay =2f;
+
             target_Position = ball.transform.position;
-            yield return new WaitForSeconds(0.75f); // Wait for 0.75 second before updating again
+            shouldMove = true;
+            yield return new WaitForSeconds(randomDelay); // Wait for 0.75 second before updating again
+            shouldMove = false;
+            rb.velocity = Vector2.zero; // Stop the bot's movement after the delay
+    
         }
     }
     private void FixedUpdate() {
-        
-        if (target_Position != null)
+            // If the bot should not move, return without updating the velocity
+        if (!shouldMove)
         {
-            Vector2 direction = (target_Position - transform.position).normalized;
-            float distance = Vector2.Distance(transform.position, target_Position);
-
-            if (distance > stoppingDistance)
-            {
-                rb.velocity = direction * moveSpeed;
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-            }
+            return;
         }
+
+        // Otherwise, determine the movement direction and set the velocity accordingly
+        Vector2 direction;
+
+        if (is_updown)
+        {
+            // Move up and down along the y-axis
+            direction = new Vector2(0f, target_Position.y - transform.position.y).normalized;
+            rb.velocity = new Vector2(0f, direction.y * moveSpeed);
+
+            // Freeze X position
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        }
+        else
+        {
+            // Move left and right along the x-axis
+            direction = new Vector2(target_Position.x - transform.position.x, 0f).normalized;
+            rb.velocity = new Vector2(direction.x * moveSpeed, 0f); // Freeze Y position
+
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        }
+        // if (target_Position != null && shouldMove)
+        // {
+        //     Vector2 direction;
+
+        //     if (is_updown)
+        //     {
+        //         // Move up and down along the y-axis
+        //         direction = new Vector2(0f, target_Position.y - transform.position.y).normalized;
+        //         rb.velocity = new Vector2(0f, direction.y * moveSpeed);
+                
+        //         // Freeze X position
+        //         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        //     }
+        //     else
+        //     {
+        //         // Move left and right along the x-axis
+        //         direction = new Vector2(target_Position.x - transform.position.x, 0f).normalized;
+        //         rb.velocity = new Vector2(direction.x * moveSpeed, 0f); // Freeze Y position
+                
+        //         rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        
+        //     }
+        // }else
+        // {
+        //     // If the bot should not move, set its velocity to zero
+        //     rb.velocity = Vector2.zero;
+        // }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,7 +112,7 @@ public class PlayerBot : MonoBehaviour
         {
             movement_ = false;
             // Resume movement after a delay of 1 second
-            StartCoroutine(ResumeMovementAfterDelay(0.75f));
+            StartCoroutine(ResumeMovementAfterDelay(0.5f));
         }
     }
 

@@ -39,6 +39,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject BallResetPsotion;
     [SerializeField] private GameObject ball;
 
+    
+    [Header("SkillBall")]
+    [SerializeField] private GameObject SkillBallPrefab;
+    [SerializeField] private GameObject SkillBallPsotion;
+    private float generationRange = 100f; // skill ball generation 
+
+
     private void Awake() {
         
         endPanel = gameEndPanel.GetComponent<EndPanel>();
@@ -127,7 +134,8 @@ public class LevelManager : MonoBehaviour
         gameEndPanel.SetActive(false);
         timer = gameTime;
         isGameOver = false;
-        
+        CloneSkillBall();
+
         ResetTimer();
         CloneBall();
         ClonePlayer();
@@ -218,6 +226,24 @@ public class LevelManager : MonoBehaviour
     
     public void GetPlayerCount(int count){
         playerCount = count;
+    }
+
+
+    public void CloneSkillBall()
+    {
+        for (int i = 0; i < 3; i++) // 生成10个物品
+        {
+            Vector3 randomPosition = GetRandomPosition(SkillBallPrefab); // 获取随机位置
+            Instantiate(SkillBallPrefab, randomPosition, Quaternion.identity , SkillBallPsotion.transform);
+        }
+    }
+    public Vector3 GetRandomPosition(GameObject obj){
+        Vector3 center = SkillBallPsotion.transform.position; // 当前脚本所在物体的位置作为中心
+        float randomX = Random.Range(center.x - generationRange, center.x + generationRange);
+        float randomY = Random.Range(center.y - generationRange, center.y + generationRange);
+        float randomZ = center.z; // 如果是2D游戏，z轴位置可以保持不变
+
+        return new Vector3(randomX, randomY, randomZ);
     }
 
 }

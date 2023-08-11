@@ -53,6 +53,13 @@ public class Ball : MonoBehaviour
         return scoreBall;
     }
 
+    public int GetPlayerID(){
+        return playerID;
+    }
+    public PlayerInfo GetPlayerInfo(){
+        return playerInfo;
+    }
+
     void Start()
     {
         StartCoroutine(StartDelay());
@@ -119,8 +126,12 @@ public class Ball : MonoBehaviour
 
             // // Apply the horizontal force to the ball
             // rb.AddForce(new Vector2(horizontalForceDirection * hitForce_base, 0f), ForceMode2D.Impulse);
-
         }
+
+        // if (collision.gameObject.CompareTag("SkillPoint"))
+        // {
+        //     Debug.Log($"SkillPoint: {collision.gameObject.name}");
+        // }
     }
 
     public void SetBallColor(int _playerID, Color _color){
@@ -158,7 +169,6 @@ public class Ball : MonoBehaviour
 
         Start();
     }
-
     public int GetBall_ID(){
         return this.playerID;
     }
