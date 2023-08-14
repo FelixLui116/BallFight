@@ -17,7 +17,6 @@ public class PlayerInfo : MonoBehaviour
     public bool score_Active = true;
     
     public enum SkillType{
-        None,
         Fire,
         Water,
         Wind,

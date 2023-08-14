@@ -7,7 +7,6 @@ public class SkillPoint : MonoBehaviour
 {
     public enum SkillType  // Fire, Water, Wind, Thunder
     {
-        None,
         Fire,
         Water,
         Wind,
