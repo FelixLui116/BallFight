@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SkillPoint : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class SkillPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        skillType = (SkillType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(SkillType)).Length);
     }
 
     // Update is called once per frame

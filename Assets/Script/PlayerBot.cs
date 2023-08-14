@@ -51,13 +51,8 @@ public class PlayerBot : MonoBehaviour
         }
     }
     private void FixedUpdate() {
-            // If the bot should not move, return without updating the velocity
-        if (!shouldMove)
-        {
-            return;
-        }
-
-        // Otherwise, determine the movement direction and set the velocity accordingly
+    if (target_Position != null && shouldMove)
+    {
         Vector2 direction;
 
         if (is_updown)
@@ -75,8 +70,57 @@ public class PlayerBot : MonoBehaviour
             direction = new Vector2(target_Position.x - transform.position.x, 0f).normalized;
             rb.velocity = new Vector2(direction.x * moveSpeed, 0f); // Freeze Y position
 
-            rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            // Check if the bot's velocity is close to zero
+            if (rb.velocity.magnitude < 0.1f)
+            {
+                // Apply a high angular velocity to achieve fast rotation
+                rb.angularVelocity = Mathf.Sign(rb.angularVelocity) * 200f; // Set a positive or negative value based on the current angular velocity
+            }
+            else
+            {
+                // Reset the angular velocity to zero
+                rb.angularVelocity = 0f;
+            }
         }
+    }
+    else
+    {
+        // If the bot should not move, set its velocity and angular velocity to zero
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+    }
+
+    
+        // /////////////////////////////   OLD CODE   /////////////////////////////
+        //     // If the bot should not move, return without updating the velocity
+        // if (!shouldMove)
+        // {
+        //     return;
+        // }
+
+        // // Otherwise, determine the movement direction and set the velocity accordingly
+        // Vector2 direction;
+
+        // if (is_updown)
+        // {
+        //     // Move up and down along the y-axis
+        //     direction = new Vector2(0f, target_Position.y - transform.position.y).normalized;
+        //     rb.velocity = new Vector2(0f, direction.y * moveSpeed);
+
+        //     // Freeze X position
+        //     rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        // }
+        // else
+        // {
+        //     // Move left and right along the x-axis
+        //     direction = new Vector2(target_Position.x - transform.position.x, 0f).normalized;
+        //     rb.velocity = new Vector2(direction.x * moveSpeed, 0f); // Freeze Y position
+
+        //     rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        // }
+        // /////////////////////////////   OLD CODE   /////////////////////////////
+
+
         // if (target_Position != null && shouldMove)
         // {
         //     Vector2 direction;
