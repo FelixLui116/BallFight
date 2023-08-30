@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class SkillPoint : MonoBehaviour
 {
@@ -15,7 +16,14 @@ public class SkillPoint : MonoBehaviour
     public SkillType skillType;
 
     private PlayerInfo player;
+    private Animation animation;
+    public Image skillImage;
 
+    private void Awake() {
+        animation = GetComponent<Animation>();
+        skillImage = GetComponent<Image>(); 
+
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Ball"))
@@ -55,6 +63,33 @@ public class SkillPoint : MonoBehaviour
         }
     }
 
+    private void ChangeSkillBallColor()
+    {
+        Color fireColor = Color.red;
+        Color waterColor = Color.blue;
+        Color windColor = Color.green;
+        Color thunderColor = Color.yellow;
+        // Set the color based on the skill type
+        switch (skillType)
+        {
+            case SkillType.Fire:
+                skillImage.color = fireColor;
+                break;
+            case SkillType.Water:
+                skillImage.color = waterColor;
+                break;
+            case SkillType.Wind:
+                skillImage.color = windColor;
+                break;
+            case SkillType.Thunder:
+                skillImage.color = thunderColor;
+                break;
+            // Add more cases as needed
+            default:
+                break;
+        }
+    }
+
     private void DestroySkillPoint()
     {
         Destroy(gameObject);
@@ -62,7 +97,12 @@ public class SkillPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // GetComponent<Animation>().Play("SkillColorChange");
+
         skillType = (SkillType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(SkillType)).Length);
+    
+        // Change the color based on the skill type
+        ChangeSkillBallColor();
     }
 
     // Update is called once per frame
