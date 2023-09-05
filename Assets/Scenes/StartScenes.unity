@@ -1171,7 +1171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9c53de3bde9c849b26411dbca5d503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  githubJsonUrl: https://github.com/FelixLui116/ProjectAPI_200/blob/main/ProjectAPI_200.json
 --- !u!1 &681710684
 GameObject:
   m_ObjectHideFlags: 0
